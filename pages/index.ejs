@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title><%= title%></title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+</head>
+<body>
+	<% if (create) { %>
+		<div class="alert alert-success">Note has been created!</div>
+	<% } %>
+	<div class="container">
+		<h1>This is working</h1>
+		<form action="/" method="post">
+			<div class="form-group mb-2">
+				<input type="text" class="form-control" name="title" required>
+			</div>
+			<button class="btn btn-primary" type="submit">Create!</button>
+		</form>
+		<% if(notes.length) { %>
+			<div class="card mt-2">
+				<ul class="list-group">
+					<% for(let m = 0; m < notes.length; m++) { %>
+						<li class="list-group-item d-flex justify-content-between align-items-center">
+							<%= notes[m].title%>
+							<div class="btn-container">
+								<button class="btn btn-primary" data-type="edit" data-id="<%= notes[m].id%>">Обновить</button>
+								<button class="btn btn-danger" data-type="remove" data-id="<%= notes[m].id%>">&#10005;</button>
+							</div>
+						</li>
+					<% } %>
+				</ul>
+			</div>
+		<% } else { %>
+			<div class="mt-2">No notes!</div>
+		<% } %>
+	</div>
+	<script src="./app.js"></script>
+</body>
+</html>
